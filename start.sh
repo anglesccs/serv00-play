@@ -867,6 +867,9 @@ InitServer(){
 }
 
 manageNeZhaAgent(){
+  if ! checkInstalled "serv00-play"; then
+     return 1
+  fi
   while true; do
   yellow "-------------------------"
   echo "探针管理："
@@ -907,6 +910,8 @@ manageNeZhaAgent(){
 }
 
 updateAgent(){
+  red "暂不提供在线升级, 只适配哪吒面板v0版本系列。"
+  return 1
   exepath="${installpath}/serv00-play/nezha/nezha-agent"
   if [ ! -e "$exepath" ]; then
     red "未安装探针，请先安装！！!"
@@ -997,7 +1002,7 @@ installNeZhaAgent(){
    cd ${workedir}
    if [[ ! -e nezha-agent ]]; then
     echo "正在下载哪吒探针..."
-    local url="https://github.com/nezhahq/agent/releases/latest/download/nezha-agent_freebsd_amd64.zip"
+    local url="https://github.com/nezhahq/agent/releases/download/v0.20.3/nezha-agent_freebsd_amd64.zip"
     agentZip="nezha-agent.zip"
     if ! wget -qO "$agentZip" "$url"; then
         red "下载哪吒探针失败"
@@ -1256,6 +1261,9 @@ stopMtg(){
 }
 
 mtprotoServ(){
+  if ! checkInstalled "serv00-play"; then
+     return 1
+  fi
    cd ${installpath}/serv00-play
 
    if [ ! -e "dmtg" ]; then
@@ -2308,6 +2316,13 @@ checkInstalled(){
   local model=$1
   if [[ "$model" == "serv00-play" ]]; then
      if [[ ! -d "${installpath}/$model" ]]; then 
+        red "请先安装$model !!!"
+        return 1
+     else 
+        return 0
+     fi
+  else
+     if [[ ! -d "${installpath}/serv00-play/$model" ]]; then 
         red "请先安装$model !!!"
         return 1
      else 
