@@ -978,7 +978,7 @@ startAgent(){
   fi
 
   #echo "./nezha-agent ${args} -s ${nezha_domain}:${nezha_port} -p ${nezha_pwd}"
-  nohup ./nezha-agent ${args} -s ${nezha_domain}:${nezha_port} -p ${nezha_pwd} >/dev/null 2>&1 &
+  nohup ./nezha-agent -c config.yml >/dev/null 2>&1 &
   
   if checknezhaAgentAlive; then
       green "启动成功!"
@@ -1054,7 +1054,7 @@ EOF
       stopNeZhaAgent
   fi
 
-  nohup ./nezha-agent ${args} -s "${nezha_domain}:${nezha_port}" -p "${nezha_pwd}" >/dev/null 2>&1 &
+  nohup ./nezha-agent -c config.yml >/dev/null 2>&1 &
   green "哪吒探针成功启动!"
   
 }
