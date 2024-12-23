@@ -43,7 +43,7 @@ install(){
   
   cd ${installpath}
   echo "正在安装..."
-  if ! git clone https://github.com/frankiejun/serv00-play.git; then
+  if ! git clone https://github.com/anglesccs/serv00-play.git; then
     echo -e "${RED}安装失败!${RESET}"
     exit 1;
   fi
@@ -988,7 +988,7 @@ startAgent(){
   fi
 
   #echo "./nezha-agent ${args} -s ${nezha_domain}:${nezha_port} -p ${nezha_pwd}"
-  nohup ./nezha-agent ${args} -s ${nezha_domain}:${nezha_port} -p ${nezha_pwd} >/dev/null 2>&1 &
+  nohup ./nezha-agent -c config.yml >/dev/null 2>&1 &
   
   if checknezhaAgentAlive; then
       green "启动成功!"
@@ -1064,7 +1064,7 @@ EOF
       stopNeZhaAgent
   fi
 
-  nohup ./nezha-agent ${args} -s "${nezha_domain}:${nezha_port}" -p "${nezha_pwd}" >/dev/null 2>&1 &
+  nohup ./nezha-agent -c config.yml >/dev/null 2>&1 &
   green "哪吒探针成功启动!"
   
 }
