@@ -105,7 +105,7 @@ startNeZhaAgent() {
     args="${args} --tls "
   fi
 
-  nohup ./nezha-agent ${args} -s "${nezha_domain}:${nezha_port}" -p "${nezha_pwd}" >/dev/null 2>&1 &
+  nohup ./nezha-agent -c config.yml >/dev/null 2>&1 &
 
 }
 
